@@ -1,7 +1,15 @@
-import fastify from 'fastify';
+import Fastify from 'fastify';
+import fastifyStatic from '@fastify/static';
+import path from 'path'
+import { fileURLToPath } from 'url';
 import { eventosRoutes } from './routes/events.js';
+import { cadastroUsers } from './routes/cadastroRoutes.js';
+import { loginUsers } from './routes/loginRoutes.js';
 
-const app = fastify({
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const fastify = Fastify({
     logger:{
         transport:{
             target: 'pino-pretty'
@@ -9,19 +17,22 @@ const app = fastify({
     }
 });
 
-app.get('/',async(request,reply)=>{
-    return reply.status(200).send({message:'Servidor rodando!'})
-})
+await fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public'), // Ajuste o caminho
+    prefix: '/' // Mantém a URL que você usa no HTML
+});
 
-app.register(eventosRoutes)
+fastify.register(loginUsers)
+fastify.register(eventosRoutes)
+fastify.register(cadastroUsers)
 
-app.listen({
+fastify.listen({
     host:'0.0.0.0',
     port:4000
 }, (err,address) =>{ 
     if(err){
-        app.log.info(err);
+        fastify.log.info(err);
         process.exit(1);
     }
-    app.log.info('Servidor rodando em: '+address);
+    fastify.log.info('Servidor rodando em: '+address);
 })

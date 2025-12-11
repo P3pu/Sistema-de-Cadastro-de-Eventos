@@ -1,5 +1,6 @@
 ## Desenvolver Backend
 
+    [ ] Criar Login e Cadastro
     [] Listar eventos
     [] Criar Eventos 
         - Nome evento

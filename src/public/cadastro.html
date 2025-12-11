@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Norte MKT</title>
+    <script defer src="/js/cadastro.js"></script>
+</head>
+<body>
+    <main class="container">
+        <form action="/cadastro" method="post" id="form">
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="name" placeholder="Nome Completo">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Email">
+            <label for="password">Senha:</label>
+            <input type="password" name="password" id="password" placeholder="senha">
+
+            <input id="btnCadastro" type="submit" value="Criar Conta">
+
+            <a href="login.html">login</a>
+        </form>
+    </main>
+</body>
+</html>
