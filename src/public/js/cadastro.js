@@ -1,33 +1,36 @@
-const sendData = async (URL, jsonData) => {
-    const response = await fetch(URL, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(jsonData)
-    });
-    
-    if (!response.ok) {
-        throw new Error(`Erro ao enviar dados: ${response.status}`);
+const URL_CADASTRO = 'http://localhost:4000/cadastro'
+
+const sendData = async (url, obj) => {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(obj)
+        })
+
+        if (!response.ok) {
+                throw new Error(`Error: ${response.status}`); 
+        }
+
+        const data = await response.json()
+        return data
+    } catch (error) {
+ throw new Error(`Error: ${error}`); 
     }
-    
-    const data = await response.json();
-    return data;
 }
 
-const cleanInput = async() =>{
-    // limpar input
-}
+const formCadastro = document.querySelector('#formCadastro')
 
-document.querySelector('#form').addEventListener('submit', async (e) => {
+formCadastro.addEventListener('submit', async (e)=>{
     e.preventDefault();
 
-    const formData = new FormData(e.target); // ✅ Mudança aqui
-    const jsonData = Object.fromEntries(formData.entries());
+    const formData = new FormData(formCadastro)
+    const obj = Object.fromEntries(formData)
+    console.log(obj)
 
-    try {
-        await sendData('http://localhost:4000/cadastro', jsonData);
-    } catch (error) {
-        console.error('Falha no cadastro:', error);
-    }
-});
+    await sendData(URL_CADASTRO,obj)
+
+})
+

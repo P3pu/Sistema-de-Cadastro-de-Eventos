@@ -1,22 +1,65 @@
-export const users = []
+import bcrypt from 'bcrypt'
 
-export async function cadastroUsers(app) {
-   app.get('/cadastro', async (request,reply)=>{
-        return reply.status(200).sendFile('cadastro.html')
-   }) 
-
-   app.post('/cadastro',async(request,reply)=>{
-        const {nome,email,password} = request.body
-        console.log(request.headers)
-        console.log(request.body)
-        const newUser = {
-            id: users.length + 1,
-            nome: nome,
-            email: email, 
-            password: password
-        }
-        users.push(newUser)
-        console.log(users)
-        return reply.status(201).send({mensagem:users})
-   })
-}  
+export async function cadastroUsers(fastify, options) {
+  
+  fastify.get('/cadastro', async (request, reply) => {
+    return reply.status(200).sendFile('cadastro.html')
+  })
+  
+  fastify.post('/cadastro', async (request, reply) => {
+    try {
+      const { nome, email, password } = request.body
+      
+      if (!nome || !email || !password) {
+        return reply.status(400).send({ message: 'Dados inválidos' })
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if(!emailRegex.test(email)){
+        return reply.status(400).send({message:'Email Inválido'})
+      }
+      
+      if(password.length < 4){
+        return reply.status(400).send({message:'Senha deve ter no mínimo 4 caracteres'})
+      }
+      
+      const db = fastify.mongo.client.db();
+      
+      const userExist = await db.collection('users').findOne({ 
+        email: email.toLowerCase() 
+      })
+      
+      if (userExist) {
+        return reply.status(409).send({ message: 'Usuário já existe!' })
+      }
+      
+      const hashPassword = await bcrypt.hash(password, 10)
+      
+      const user = {
+        nome: nome.trim(),
+        email: email.toLowerCase().trim(),
+        password: hashPassword,
+        criadoEm: new Date()
+      }
+      
+      const results = await db.collection('users').insertOne(user)
+      
+      return reply.status(201).send({ 
+        message: 'Usuário criado com sucesso!',
+        userId: results.insertedId
+      })
+      
+    } catch (error) {
+      console.error('❌ Erro no cadastro:', error)
+      
+      if(error.code === 11000){
+        return reply.status(409).send({error: 'Usuário já existe'})
+      }
+      
+      return reply.status(500).send({
+        error: 'Erro interno na rota de cadastro', 
+        message: error.message
+      })
+    }
+  })
+}

@@ -1,38 +1,83 @@
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
+import fastifyCors from '@fastify/cors';
+import fastifyMongodb from '@fastify/mongodb';
+import fastifyFormbody from '@fastify/formbody'; // ✅ Adicione
+import dotenv from 'dotenv';
 import path from 'path'
 import { fileURLToPath } from 'url';
-import { eventosRoutes } from './routes/events.js';
 import { cadastroUsers } from './routes/cadastroRoutes.js';
 import { loginUsers } from './routes/loginRoutes.js';
+import { eventosUsers } from './routes/eventosRoutes.js';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const fastify = Fastify({
-    logger:{
-        transport:{
-            target: 'pino-pretty'
-        }
+  logger: {
+    transport: {
+      target: 'pino-pretty'
     }
+  }
 });
 
-await fastify.register(fastifyStatic, {
-    root: path.join(__dirname, 'public'), // Ajuste o caminho
-    prefix: '/' // Mantém a URL que você usa no HTML
-});
+async function start() {
+  try {
+    // 1. CORS
+    await fastify.register(fastifyCors, {
+      origin: true
+    });
 
-fastify.register(loginUsers)
-fastify.register(eventosRoutes)
-fastify.register(cadastroUsers)
+    // 2. ✅ Parser de formulários (ADICIONE ISSO!)
+    await fastify.register(fastifyFormbody);
 
-fastify.listen({
-    host:'0.0.0.0',
-    port:4000
-}, (err,address) =>{ 
-    if(err){
-        fastify.log.info(err);
-        process.exit(1);
-    }
-    fastify.log.info('Servidor rodando em: '+address);
-})
+    // 3. Static files
+    await fastify.register(fastifyStatic, {
+      root: path.join(__dirname, 'public'),
+      prefix: '/'
+    });
+
+    // 4. MongoDB
+    console.log('🔍 Conectando ao MongoDB...')
+    
+    await fastify.register(fastifyMongodb, {
+      url: process.env.MONGO_URL,
+      forceClose: true
+    });
+
+    // 5. Registrar rotas
+    console.log('📍 Registrando rotas...')
+    await fastify.register(loginUsers);
+    await fastify.register(cadastroUsers);
+    await fastify.register(eventosUsers);
+    
+    // 6. Hook para criar índice
+    fastify.addHook('onReady', async () => {
+      try {
+        const db = fastify.mongo.client.db();
+        await db.collection('users').createIndex({ email: 1 }, { unique: true });
+        console.log('✅ Índice criado com sucesso');
+      } catch (error) {
+        console.error('❌ Erro ao criar índice:', error);
+      }
+    });
+
+    // 7. Iniciar servidor
+    await fastify.listen({
+      host: '0.0.0.0',
+      port: 4000
+    });
+
+    console.log('🚀 Servidor rodando em: http://localhost:4000');
+    console.log('✅ MongoDB conectado');
+    
+  } catch (err) {
+    console.error('❌ Erro ao iniciar servidor:', err);
+    fastify.log.error(err);
+    process.exit(1);
+  }
+}
+
+start();
