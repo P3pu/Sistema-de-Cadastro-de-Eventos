@@ -44,6 +44,7 @@ export async function cadastroUsers(fastify, options) {
       
       const results = await db.collection('users').insertOne(user)
       
+      
       return reply.status(201).send({ 
         message: 'Usuário criado com sucesso!',
         userId: results.insertedId

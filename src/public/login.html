@@ -1,22 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>Login - Norte MKT</title>
-</head>
-<body>
+  </head>
+  <body>
     <main class="container">
-        <form method="post" id="formLogin">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Email">
-            <label for="password">Senha:</label>
-            <input type="password" name="password" id="password" placeholder="senha">
+      <form method="post" id="formLogin">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          placeholder="Email"
+          required
+        />
+        <label for="password">Senha:</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Senha deve ter no mínimo 4 caracteres"
+          required
+        />
 
-            <input type="submit" value="Entrar">
+        <div class="btn">
+          <input type="submit" value="Entrar" />
 
-            <a href="cadastro.html">Cadastre-se</a>
-        </form>
+          <button>
+              <a  href="/cadastro">Cadastre-se</a>
+          </button>
+        </div>
+      </form>
     </main>
-</body>
+  </body>
 </html>

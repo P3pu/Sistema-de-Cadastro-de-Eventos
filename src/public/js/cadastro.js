@@ -31,6 +31,7 @@ formCadastro.addEventListener('submit', async (e)=>{
     console.log(obj)
 
     await sendData(URL_CADASTRO,obj)
-
+    formCadastro.reset()
+    window.location.href = '/eventos'
 })
 

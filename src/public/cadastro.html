@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cadastro.css">
     <title>Cadastro - Norte MKT</title>
     <script defer src="/js/cadastro.js"></script>
 </head>
@@ -10,15 +11,18 @@
     <main class="container">
         <form method="post" id="formCadastro">
             <label for="nome">Nome</label>
-            <input type="text" name="nome" id="name" placeholder="Nome Completo">
+            <input type="text" name="nome" id="name" placeholder="Nome Completo" required>
             <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Email">
+            <input type="email" name="email" id="email" placeholder="Email" required>
             <label for="password">Senha:</label>
-            <input type="password" name="password" id="password" placeholder="senha">
+            <input type="password" name="password" id="password" placeholder="Senha deve ter no mínimo 4 caracteres" required>
 
-            <input id="btnCadastro" type="submit" value="Criar Conta">
+            <div class="btn">
+                <input id="btnCadastro" type="submit" value="Criar Conta">
+                <a href="/">login</a>
 
-            <a href="login.html">login</a>
+            </div>
+
         </form>
     </main>
 </body>

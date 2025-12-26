@@ -32,15 +32,12 @@ const sendData = async (url,obj) => {
 
 
 const formLogin = document.querySelector('#formLogin')
-
 formLogin.addEventListener('submit', async (e)=>{
     e.preventDefault()
 
     const formData = new FormData(formLogin)
     const obj = Object.fromEntries(formData)
     console.log(obj)
-
-    formLogin.reset()
-
     await sendData(URL_LOGIN,obj)
+    formLogin.reset()
 })
