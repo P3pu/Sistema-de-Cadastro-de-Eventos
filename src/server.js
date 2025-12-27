@@ -9,6 +9,9 @@ import { fileURLToPath } from 'url';
 import { cadastroUsers } from './routes/cadastroRoutes.js';
 import { loginUsers } from './routes/loginRoutes.js';
 import { eventosUsers } from './routes/eventosRoutes.js';
+import fastifySession from '@fastify/session';
+import fastifyCookie from '@fastify/cookie';
+import authPlugin from './plugins/auth.js';
 
 dotenv.config();
 
@@ -39,6 +42,18 @@ async function start() {
       prefix: '/'
     });
 
+    await fastify.register(fastifyCookie)
+    await fastify.register(fastifySession,{
+      secret: process.env.SESSION_SECRET,
+      cookie: {
+        secure: false,
+        httpOnly:true,
+        maxAge: 1000 * 60 * 60,
+        sameSite:'lax'
+      }
+
+    })
+
     // 4. MongoDB
     console.log('🔍 Conectando ao MongoDB...')
     
@@ -47,6 +62,7 @@ async function start() {
       forceClose: true
     });
 
+    await fastify.register(authPlugin)
     // 5. Registrar rotas
     console.log('📍 Registrando rotas...')
     await fastify.register(loginUsers);
