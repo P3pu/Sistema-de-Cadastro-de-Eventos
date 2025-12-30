@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/eventos.css" />
     <script defer src="js/cards.js"></script>
+    <script defer src="js/modal.js"></script>
     <title>Gereciador de Eventos</title>
   </head>
   <body>
@@ -28,14 +29,106 @@
           <h1>Night run</h1>
           <div class="icons">
             <div class="icon">
-                <img src="img/edit.svg" alt="edit">
+              <img src="img/edit.svg" alt="edit" />
             </div>
             <div class="icon">
-                <img src="img/trash.svg" alt="trash">
+              <img src="img/trash.svg" alt="trash" />
             </div>
           </div>
         </div>
       </section>
     </main>
+
+    <div class="modalContent">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h2>Adicionar Evento</h2>
+          <button class="closeModal">&times;</button>
+        </div>
+
+        <div class="tabs-container">
+          <div class="tab active" data-tab="info">Informações do Evento</div>
+          <div class="tab" data-tab="estimativa">Estimativa de Inscrições</div>
+          <div class="tab" data-tab="camiseta">Grade de Camisetas</div>
+          <div class="tab" data-tab="lote">Virada de Lote</div>
+          <div class="tab" data-tab="assinaturas">Assinatura dos Responsáveis</div>
+        </div>
+
+        <div class="modal-body">
+                   <!-- Aba 1: Informações do Evento -->
+          <div class="tab-content active" data-content="info">
+            
+            <div class="form-group">
+              <label for="eventName">Nome do evento</label>
+              <input type="text" id="eventName" name="eventName" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="eventLink">Link do Evento</label>
+              <input type="url" id="eventLink" name="eventLink">
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventCity">Cidade</label>
+                <input type="text" id="eventCity" name="eventCity" required>
+              </div>
+              <div class="form-group">
+                <label for="eventModality">Modalidade / Distância</label>
+                <input type="text" id="eventModality" name="eventModality">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventSKU">SKU</label>
+                <input type="text" id="eventSKU" name="eventSKU">
+              </div>
+              <div class="form-group">
+                <label for="eventTaxa">Taxa</label>
+                <input type="text" id="eventTaxa" name="eventTaxa">
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label for="eventDate">Data da realização do evento</label>
+                <input type="date" id="eventDate" name="eventDate" required>
+              </div>
+              <div class="form-group">
+                <label for="cartOpenDate">Data de abertura de carrinho</label>
+                <input type="date" id="cartOpenDate" name="cartOpenDate">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="eventLimit">Limite total do evento</label>
+              <input type="number" id="eventLimit" name="eventLimit">
+            </div>
+          </div>
+
+           <!-- Aba 2: Estimativa de Inscrições -->
+          <div class="tab-content" data-content="estimativa">
+           <h1>estimativa</h1>
+          </div>
+
+          <div class="tab-content" data-content="camiseta">
+            <h1>camiseta</h1>
+          </div>
+          <div class="tab-content" data-content="lote">
+            <h1>Lote</h1>
+          </div>
+          <div class="tab-content" data-content="assinaturas">
+            <h1>assinaturas</h1>
+          </div>
+          
+        </div>
+
+        <div class="modal-footer">
+          <button type="Salvar" class="btn btnSave">Salvar</button>
+        </div>
+      </div>
+    </div>
+    </div>
   </body>
 </html>
