@@ -125,7 +125,7 @@
                       <td><input type="number"  name="kitPlus" id="kitPlusCompany"></td>
                       <td><input type="number"  name="kitVip" id="kitVipCompany"></td>
                       <td><input type="number"  name="KitSuper" id="KitSuperCompany"></td>
-                      <td><input type="number"  name="KitPaticipacao" id="KitPaticupaçãoCompany"></td>
+                      <td><input type="number"  name="KitPaticipacao" id="KitPaticupacaoCompany"></td>
                       <td><input type="number"  name="KitCompleto" id="KitCompletoCompany"></td>
                     </tr>
                     <tr>
@@ -133,7 +133,7 @@
                       <td><input type="number"  name="kitPlus" id="kitPlusSite"></td>
                       <td><input type="number"  name="kitVip" id="kitVipSite"></td>
                       <td><input type="number"  name="KitSuper" id="KitSuperSite"></td>
-                      <td><input type="number"  name="KitPaticipacao" id="KitPaticipaçãoSite"></td>
+                      <td><input type="number"  name="KitPaticipacao" id="KitPaticipacaoSite"></td>
                       <td><input type="number"  name="KitCompleto" id="KitCompletoSite"></td>
                     </tr>
                     <tr>
@@ -141,7 +141,7 @@
                       <td><input type="number"  name="kitPlus" id="kitPlusCortesia"></td>
                       <td><input type="number"  name="kitVip" id="kitVipCortesia"></td>
                       <td><input type="number"  name="KitSuper" id="KitSuperCortesia"></td>
-                      <td><input type="number"  name="KitPaticipacao" id="KitParticipaçãoCortesia"></td>
+                      <td><input type="number"  name="KitPaticipacao" id="KitParticipacaoCortesia"></td>
                       <td><input type="number"  name="KitCompleto" id="KitCompletoCortesia"></td>
                     </tr>
                   </tbody>
@@ -196,12 +196,99 @@
             </div>
           </div>
           <div class="tab-content" data-content="lote">
-            <h1>Lote</h1>
+             <div class="form-group">
+                <label for="valorInicial">Valor inicial da inscrição:</label>
+                <input type="text" id="valorInicial" name="valorInicial" placeholder="R$ 0,00">
+              </div>
+
+                 <div class="form-group">
+                <label for="viradaCada">Virar o lote a cada:</label>
+                <input type="number" id="viradaCada" name="viradaCada" placeholder="Ex: 100">
+              </div>
+
+              <div class="form-group">
+                <label>Para os seguintes valores:</label>
+                <div class="lote-valores">
+                  <input type="text" name="loteValor1" placeholder="R$ 0,00">
+                  <input type="text" name="loteValor2" placeholder="R$ 0,00">
+                  <input type="text" name="loteValor3" placeholder="R$ 0,00">
+                  <input type="text" name="loteValor4" placeholder="R$ 0,00">
+                </div>
+              </div>
           </div>
           <div class="tab-content" data-content="assinaturas">
-            <h1>assinaturas</h1>
+             <div class="signature-grid">
+              <div class="signature-item">
+                <label>Site:</label>
+                <input type="text" name="sig_site" placeholder="Assinatura">
+                <span class="responsible-name">(Alexandre Braga)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Company:</label>
+                <input type="text" name="sig_company" placeholder="Assinatura">
+                <span class="responsible-name">(Lavínia Porto)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Cortesias:</label>
+                <input type="text" name="sig_cortesias" placeholder="Assinatura">
+                <span class="responsible-name">(Agatha Nadolsky)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Produção:</label>
+                <input type="text" name="sig_producao" placeholder="Assinatura">
+                <span class="responsible-name">(Gabriela Martins)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Merchandising:</label>
+                <input type="text" name="sig_merchandising" placeholder="Assinatura">
+                <span class="responsible-name">(Priscila Taborda)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Limitação:</label>
+                <input type="text" name="sig_limitacao" placeholder="Assinatura">
+                <span class="responsible-name">(Fábio Avelar)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Taxa:</label>
+                <input type="text" name="sig_taxa" placeholder="Assinatura">
+                <span class="responsible-name">(Caio ou Johnny)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>SKU:</label>
+                <input type="text" name="sig_sku" placeholder="Assinatura">
+                <span class="responsible-name">(Caio ou Johnny)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Servidor:</label>
+                <input type="text" name="sig_servidor" placeholder="Assinatura">
+                <span class="responsible-name">(Michele)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Cadastro:</label>
+                <input type="text" name="sig_cadastro" placeholder="Assinatura">
+                <span class="responsible-name">(Letícia Vieira)</span>
+              </div>
+              
+              <div class="signature-item">
+                <label>Validação Geral:</label>
+                <input type="text" name="sig_validacao" placeholder="Assinatura">
+                <span class="responsible-name">(Otávio Oliveira)</span>
+              </div>
+              
+              <div class="form-group" style="margin-top: 20px;">
+                <label for="dataAssinatura">Data da assinatura</label>
+                <input type="date" id="dataAssinatura" name="dataAssinatura">
+              </div>
           </div>
-          
         </div>
 
         <div class="modal-footer">

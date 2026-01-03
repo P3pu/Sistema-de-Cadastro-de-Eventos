@@ -61,7 +61,7 @@ async function start() {
       url: process.env.MONGO_URL,
       forceClose: true
     });
-
+    console.log(fastify.printRoutes());
     await fastify.register(authPlugin)
     // 5. Registrar rotas
     console.log('📍 Registrando rotas...')
