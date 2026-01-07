@@ -31,7 +31,11 @@ async function start() {
   try {
     // 1. CORS
     await fastify.register(fastifyCors, {
-      origin: true
+      origin: [
+        'https://sistema-de-cadastro-de-eventos.onrender.com',
+        'http://localhost:4000'
+      ],
+      credentials:true
     });
 
     // 2. ✅ Parser de formulários (ADICIONE ISSO!)

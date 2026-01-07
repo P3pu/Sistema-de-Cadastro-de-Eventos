@@ -343,7 +343,7 @@ function preencherFormulario(evento) {
 ================================ */
 async function buscarEventos() {
     try {
-        const response = await fetch('http://localhost:4000/dados/eventos', {
+        const response = await fetch('https://sistema-de-cadastro-de-eventos.onrender.com/dados/eventos', {
             method: 'GET',
             credentials: 'include'
         });
@@ -366,7 +366,7 @@ async function buscarEventos() {
 ================================ */
 async function buscarEventoPorId(id) {
     try {
-        const response = await fetch(`http://localhost:4000/eventos/${id}`, {
+        const response = await fetch(`https://sistema-de-cadastro-de-eventos.onrender.com/eventos/${id}`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -390,7 +390,7 @@ async function buscarEventoPorId(id) {
 ================================ */
 async function deletarEventos(id) {
     try {
-        const response = await fetch(`http://localhost:4000/eventos/${id}`, {
+        const response = await fetch(`https://sistema-de-cadastro-de-eventos.onrender.com/eventos/${id}`, {
             method: 'DELETE',
             credentials: 'include'
         });
@@ -412,7 +412,7 @@ async function deletarEventos(id) {
 ================================ */
 async function atualizarEvento(id, dadosEvento) {
     try {
-        const response = await fetch(`http://localhost:4000/eventos/${id}`, {
+        const response = await fetch(`https://sistema-de-cadastro-de-eventos.onrender.com/eventos/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -436,7 +436,7 @@ async function atualizarEvento(id, dadosEvento) {
 ================================ */
 async function criarEvento(dadosEvento) {
     try {
-        const response = await fetch('http://localhost:4000/eventos', {
+        const response = await fetch('https://sistema-de-cadastro-de-eventos.onrender.com/eventos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',

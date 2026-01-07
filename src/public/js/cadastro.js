@@ -1,4 +1,6 @@
 const URL_CADASTRO = 'http://localhost:4000/cadastro'
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://sistema-de-cadastro-de-eventos.onrender.com' : URL_CADASTRO;
+
 
 const sendData = async (url, obj) => {
     try {
@@ -30,7 +32,7 @@ formCadastro.addEventListener('submit', async (e)=>{
     const obj = Object.fromEntries(formData)
     console.log(obj)
 
-    await sendData(URL_CADASTRO,obj)
+    await sendData(API_URL,obj)
     formCadastro.reset()
     window.location.href = '/eventos'
 })

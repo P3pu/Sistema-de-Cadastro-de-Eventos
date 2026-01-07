@@ -1,4 +1,5 @@
 const URL_LOGIN = "http://localhost:4000"
+const API_URL = process.env.NODE_ENV === 'production' ? 'https://sistema-de-cadastro-de-eventos.onrender.com' : URL_LOGIN;
 
 const sendData = async (url,obj) => {
     try {
@@ -38,6 +39,6 @@ formLogin.addEventListener('submit', async (e)=>{
     const formData = new FormData(formLogin)
     const obj = Object.fromEntries(formData)
     console.log(obj)
-    await sendData(URL_LOGIN,obj)
+    await sendData(API_URL,obj)
     formLogin.reset()
 })
