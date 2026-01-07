@@ -15,6 +15,7 @@ import authPlugin from './plugins/auth.js';
 
 dotenv.config();
 
+const PORT = process.env.PORT || 4000
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -81,9 +82,9 @@ async function start() {
     });
 
     // 7. Iniciar servidor
-    await fastify.listen({
+    fastify.listen({
       host: '0.0.0.0',
-      port: 4000
+      port: PORT
     });
 
     console.log('🚀 Servidor rodando em: http://localhost:4000');

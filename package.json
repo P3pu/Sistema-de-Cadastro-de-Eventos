@@ -1,11 +1,14 @@
 {
-  "name": "cadastroevento",
+  "name": "cadastroEvento",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
   "scripts": {
     "dev": "node --watch ./src/server.js",
     "start": "node src/server.js"
+  },
+  "engines": {
+    "node": ">=24.12.0"
   },
   "repository": {
     "type": "git",
